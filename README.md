@@ -12,4 +12,5 @@ The pipeline takes as input fasta protein sequences and/or pdb files, which are 
 
 - To install necessary libraries:
 `conda install --file conda-requirements.txt -c conda-forge -c bioconda`
+
 `pip install -r pip-requirements.txt`
