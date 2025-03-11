@@ -1,6 +1,6 @@
 # BCEP-pipeline
 
-FIXME! Add description
+The pipeline takes as input fasta protein sequences and/or pdb files, which are passed into various pretrained models to perform downstream calculations.
 
 ## Set up environment
 
