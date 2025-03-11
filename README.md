@@ -1,6 +1,6 @@
 # BCEP-pipeline
 
-The pipeline takes as input fasta protein sequences and/or pdb files, which are passed into various pretrained models to perform downstream calculations.
+The pipeline takes as input fasta protein sequences and/or pdb files, which are passed into various pretrained models and outputs per-residue epitope propensity scores as a csv.
 
 ## Set up environment
 
