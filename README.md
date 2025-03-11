@@ -1,14 +1,15 @@
 # BCEP-pipeline
 
-The pipeline takes as input a list of sequences in a CSV, which are passed into a pretrained language model to perform downstream calculations.
+FIXME! Add description
 
 ## Set up environment
 
 - Create a new environment:
-`conda create -n plm`
+`conda create -n BCEP`
 
 - Activate the environment:
-`conda activate plm`
+`conda activate BCEP`
 
 - To install necessary libraries:
-`pip install -r requirements.txt`
+`conda install --file requirements.txt -c conda-forge -c bioconda
+`
