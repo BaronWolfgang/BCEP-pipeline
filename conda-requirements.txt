@@ -28,3 +28,6 @@ bioconductor-pwalign
 #discotope3
 pyg pyg -y
 conda-forge pip -y
+
+#epigraph
+conda-forge dssp
