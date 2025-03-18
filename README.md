@@ -17,6 +17,10 @@ The pipeline takes as input fasta protein sequences and/or pdb files, which are 
 
 ### Discotope-3.0
 Discotope needs to be setup independently:
-`cd src`
+```
+cd src/discotope3_web/
+pip install .
 
-Then follow the instructions on [https://github.com/Magnushhoie/DiscoTope-3.0/blob/master](https://github.com/Magnushhoie/DiscoTope-3.0/tree/master)
+# Unzip models to use
+unzip models.zip
+```
