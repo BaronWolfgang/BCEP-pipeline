@@ -14,3 +14,9 @@ The pipeline takes as input fasta protein sequences and/or pdb files, which are 
 `conda install --file conda-requirements.txt -c conda-forge -c bioconda`
 
 `pip install -r pip-requirements.txt`
+
+### Discotope-3.0
+Discotope needs to be setup independently:
+`cd src`
+
+Then follow the instructions on [https://github.com/Magnushhoie/DiscoTope-3.0/blob/master](https://github.com/Magnushhoie/DiscoTope-3.0/tree/master)
