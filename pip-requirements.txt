@@ -1,11 +1,10 @@
-#shared
-biopython==1.83
-biotite==0.40.0
+# Shared Python Libraries
+biopython>=1.80,<1.84
 fair-esm==1.0.3
-numpy==1.24.*
-pandas==1.4.3
+numpy==1.24.* 
+pandas==1.4.3 
 
-#bepipred-3.0
+# Bepipred-3.0
 bp3==0.0.12.7
 importlib-resources==5.8.0
 plotly==5.8.0
@@ -17,13 +16,10 @@ torch==1.12.0
 typing-extensions==4.3.0
 zipp==3.8.0
 
-#discotope-3.0
-torch_geometric
+# Discotope-3.0
 scikit-learn
+torch_geometric
+./src/discotope3_web
 xgboost==2.*
 pygam==0.9.0
-joblib 
-
-#epigraph
-wget
-
+joblib
