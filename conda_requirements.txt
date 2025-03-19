@@ -1,0 +1,47 @@
+# Core Python Packages
+python=3.10.*
+pip
+setuptools
+wheel
+
+# Bioinformatics Libraries
+biotite=0.40.0
+biopython
+
+# R Packages
+r-base
+r-data.table
+r-tidyverse
+r-readxl
+r-purrr
+r-readr
+r-scales
+r-jsonlite
+r-ggplot2
+r-cowplot
+r-pheatmap
+r-viridislite
+r-ggseqlogo
+r-bio3d
+r-nglviewer
+r-htmlwidgets
+r-htmltools
+r-biocmanager
+
+# Bioconductor Packages
+bioconductor-msa
+bioconductor-biostrings
+bioconductor-pwalign
+bioconductor-genomeinfodbdata
+
+# Machine Learning & Graph Processing (Discotope3)
+pyg  # From pyg channel
+pytorch
+scikit-learn
+torch-scatter
+xgboost
+pygam
+joblib
+
+# Epigraph Dependencies
+wget
