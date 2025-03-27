@@ -36,7 +36,6 @@ pip install -r pip-requirements.txt
 ## Run the pipeline:
 Run the script `bcep.py` with the following arguments:
 - `--tools` select one or more tools to run from (`discotope3`, `bepipred3`)
-Depending on the tool(s) selected different inputs are required:
--- `--pdb` file path to a .pdb file (bepipred3)
--- `--fasta` file path to .fasta file (discotope3) 
+- `--pdb` file path to a .pdb file (required for `bepipred3`)
+- `--fasta` file path to .fasta file (required for `discotope3`) 
 - `--out_dir` folder name to store output
