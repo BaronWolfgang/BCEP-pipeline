@@ -14,8 +14,6 @@ The pipeline takes as input fasta protein sequences and/or pdb files, which are 
 Discotope-3.0 requires cloning their repository into into the src folder:
 ```
 cd src
-mkdir bp3
-cd bp3
 git clone https://github.com/UberClifford/BepiPred3.0-Predictor
 ```
 
@@ -29,7 +27,7 @@ git clone https://github.com/Magnushhoie/discotope3_web/
 unzip models.zip
 ```
 
-- To install necessary libraries:
+## To install necessary libraries:
 ```
 conda install --file conda-requirements.txt -c conda-forge -c bioconda
 pip install -r pip-requirements.txt
