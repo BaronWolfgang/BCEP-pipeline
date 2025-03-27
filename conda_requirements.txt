@@ -45,3 +45,10 @@ joblib
 
 # Epigraph Dependencies
 wget
+
+# BepiPred-2.0
+perl-bioperl
+blast-legacy
+blast
+libnsl=1.0.0
+signalp

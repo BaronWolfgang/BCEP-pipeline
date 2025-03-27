@@ -7,3 +7,6 @@ src/discotope3_web/models/
 # Ignore src/discotope3_web/data
 src/discotope3_web/data/
 
+# Ignore non working repo's
+src/bp2/
+src/dssp/
