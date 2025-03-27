@@ -5,17 +5,23 @@ The pipeline takes as input fasta protein sequences and/or pdb files, which are 
 ## Set up environment
 
 - Create a new environment:
-```
-conda env create -f environment.yml -n BCEP
-```
-This will create the environment BCEP and install all dependencies in `environment.yml`
+`conda create -n BCEP`
+
+- Activate the environment:
+`conda activate BCEP`
 
 ### Discotope-3.0
-Discotope needs to be setup independently:
+Discotope-3.0 requires a seperate installment into the src folder:
 ```
-cd src/discotope3_web/
-pip install .
+cd src
+git clone https://github.com/Magnushhoie/discotope3_web/
 
 # Unzip models to use
 unzip models.zip
+```
+
+- To install necessary libraries:
+```
+conda install --file conda-requirements.txt -c conda-forge -c bioconda
+pip install -r pip-requirements.txt
 ```
