@@ -1,5 +1,5 @@
 # Ignore the test_data folder
-test_data/
+test_data/*
 
 # Ignore src
-src/
+src/*
