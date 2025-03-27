@@ -1,0 +1,21 @@
+Current working directory:
+/hpc/dla_lti/jvanmeenen/mrp/BCEP-pipeline
+/bin/bash
+Using cache found in /home/dla_lti/jvanmeenen/.cache/torch/hub/facebookresearch_esm_main
+/hpc/dla_lti/jvanmeenen/miniconda3/envs/BCEP/lib/python3.10/site-packages/esm/pretrained.py:215: UserWarning: Regression weights not found, predicting contacts will not produce correct results.
+  warnings.warn(
+Using cache found in /home/dla_lti/jvanmeenen/.cache/torch/hub/facebookresearch_esm_main
+DSSP path: None
+
+test_data/ detected..
+Data Processing...
+Traceback (most recent call last):
+  File "/hpc/dla_lti/jvanmeenen/mrp/BCEP-pipeline/src/EpiGraph/inference_customPDB.py", line 181, in <module>
+    data = generate_graph(pdb, save_path, distance_threshold=distance_threshold, RSA_threshold=RSA_threshold)
+  File "/hpc/dla_lti/jvanmeenen/mrp/BCEP-pipeline/src/EpiGraph/inference_customPDB.py", line 147, in generate_graph
+    dssp = DSSP(model=model,in_file = f"{save_path}/{pdb}.pdb", dssp='mkdssp') #MYEDIT
+  File "/hpc/dla_lti/jvanmeenen/miniconda3/envs/BCEP/lib/python3.10/site-packages/Bio/PDB/DSSP.py", line 389, in __init__
+    dssp_dict, dssp_keys = dssp_dict_from_pdb_file(
+  File "/hpc/dla_lti/jvanmeenen/miniconda3/envs/BCEP/lib/python3.10/site-packages/Bio/PDB/DSSP.py", line 201, in dssp_dict_from_pdb_file
+    raise Exception("DSSP failed to produce an output")
+Exception: DSSP failed to produce an output
