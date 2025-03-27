@@ -13,14 +13,14 @@ BEGIN {
   $ENV{NetSurfP}	= '/hpc/dla_lti/jvanmeenen/mrp/BCEP-pipeline/src/netsurfp-1.0';
   
   # full path to the 'blastpgp' executable on your system
-  $ENV{BLASTPROG}	= '/usr/cbs/bio/bin/linux64/blastpgp-2.2.18';
+  $ENV{BLASTPROG}	= '/hpc/dla_lti/jvanmeenen/miniconda3/envs/BCEP/bin/blastpgp';
   #$ENV{BLASTPROG}	= '/usr/cbs/bio/bin/irix64/blastpgp';
 
   # full path to the BLAST data directory on your system
   $ENV{BLASTMAT}	= '/usr/cbs/bio/src/blast-2.2.18/data/';
 
   # determine where to store temporary files (must be writable to all users)
-  $ENV{TMPDIR}		= '/scratch';
+  $ENV{TMPDIR}		= '/hpc/dla_lti/jvanmeenen/mrp/BCEP-pipeline/src/bp2/netsurfp-1.0/tmp/';
 
 }
 
