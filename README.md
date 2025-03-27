@@ -10,6 +10,15 @@ The pipeline takes as input fasta protein sequences and/or pdb files, which are 
 - Activate the environment:
 `conda activate BCEP`
 
+### BepiPred-3.0
+Discotope-3.0 requires cloning their repository into into the src folder:
+```
+cd src
+mkdir bp3
+cd bp3
+git clone https://github.com/UberClifford/BepiPred3.0-Predictor
+```
+
 ### Discotope-3.0
 Discotope-3.0 requires cloning their repository into into the src folder:
 ```

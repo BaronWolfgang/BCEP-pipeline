@@ -13,4 +13,4 @@ echo "Current working directory:"
 pwd
 
 echo $SHELL
-python3 src/bp3/bepipred3_CLI.py -i "test_data/pdb_protein_sequences_part_2.fasta" -o "test_data/test_output" -pred "vt_pred" 
+python3 src/BepiPred3.0-Predictor/bepipred3_CLI.py -i "test_data/pdb_protein_sequences_part_2.fasta" -o "test_data/test_output" -pred "vt_pred" 
