@@ -11,7 +11,7 @@ The pipeline takes as input fasta protein sequences and/or pdb files, which are 
 `conda activate BCEP`
 
 ### Discotope-3.0
-Discotope-3.0 requires a seperate installment into the src folder:
+Discotope-3.0 requires cloning their repository into into the src folder:
 ```
 cd src
 git clone https://github.com/Magnushhoie/discotope3_web/

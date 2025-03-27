@@ -1,12 +1,5 @@
 # Ignore the test_data folder
 test_data/
 
-# Ignore src/discotope3_web/models
-src/discotope3_web/models/
-
-# Ignore src/discotope3_web/data
-src/discotope3_web/data/
-
-# Ignore non working repo's
-src/bp2/
-src/dssp/
+# Ignore src
+src/
