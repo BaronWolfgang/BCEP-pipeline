@@ -52,6 +52,36 @@ Additional arguments:
   - If running only `bepipred3`, multi-sequence FASTA files are supported, but requires --standardize_outputs to be set to False
 - If `--standardize_outputs` is set to `False`, no merged .csv is written to `--out_dir`. Instead, raw tool outputs are available in: /[`tmp_dir`]/[`tool`].
 
+## Output format
+When `--standardize_outputs` is set to `True`, the pipeline generates a single merged CSV per PDB file in the `--out_dir`. Each row corresponds to a residue, and each column contains standardized information or epitope prediction scores.
+- From the PDB file:
+  - `structure`: Protein structure identifier 
+  - `model`: Structural model number (default 0). PDB files can contain multiple models in NMR structures of different conformations of the same protein. The tools can only process a single model and will always select the first one, 0)
+  - `chain`: Chain identifier from the PDB
+  - `seqresno`: Residue number in the canonical sequence (SEQRES)
+  - `seqresid`: One-letter amino acid code from the canonical sequence (SEQRES)
+  - `resno`: Residue number from the PDB coordinates (may be empty if residue was not resolved in the structure)
+  - `resid`: Three-letter amino acid code from the PDB coordinates (empty if no atoms)
+  - `icode`: Insertion code from the PDB file (if any)
+  - `atom_name`: Atom name (CA for alpha carbon)
+  - `altloc`: Alternate location indicator from PDB
+  - `x`: X atomic coordinate 
+  - `y`: Y atomic coordinate
+  - `z`: Z atomic coordinate 
+  - `occupancy`: Occupancy value for the atom
+  - `bfactor`: B-factor / temperature factor
+  - `element`: Chemical element of the atom (only C for the CA atom)
+
+- From the various tools:
+  - `epigraph_score`: Epitope probability from EpiGraph
+  - `epigraph_epiclass`: Binary epitope classification (EpiGraph)
+  - `epigraph_rsa`: Relative solvent accessibility (RSA) calculated by EpiGraph
+  - `discotope3_score`: Predicted epitope score from Discotope3
+  - `discotope3_calibrated_score`: Calibrated Discotope3 score, normalized for protein length and surface accessibility
+  - `discotope3_rsa`: Relative solvent accessibility calculated by Discotope3
+  - `bepipred3_score`: Predicted epitope score from Bepipred3
+  - `bepipred3_score_linear`: Linear epitope score using sequential smoothing from Bepipred3
+
 ## Visualizing Results
 
 To visualize the results, you can use the Shiny app provided. Follow these steps:
