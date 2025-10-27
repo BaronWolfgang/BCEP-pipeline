@@ -1,0 +1,123 @@
+#!/usr/bin/env Rscript
+
+# ============================================================
+# Generate a standalone Shiny app folder from CSV + PDB
+# ============================================================
+
+args <- commandArgs(trailingOnly = TRUE)
+if(length(args) != 3){
+  stop("Usage: Rscript generate_shiny_app.R <protein_csv> <pdb_file> <output_folder>")
+}
+
+protein_csv <- args[1]
+pdb_file <- args[2]
+out_folder <- args[3]
+
+if(!file.exists(protein_csv)) stop("CSV not found: ", protein_csv)
+if(!file.exists(pdb_file)) stop("PDB not found: ", pdb_file)
+
+# --- 1. Load required packages ---
+required_packages <- c("shiny","dplyr","ggplot2","NGLVieweR","scales","stringr","readr","tools")
+for(pkg in required_packages){
+  if(!requireNamespace(pkg, quietly = TRUE)) install.packages(pkg, repos="https://cloud.r-project.org")
+  library(pkg, character.only = TRUE)
+}
+
+# --- 2. Create output folder ---
+if(!dir.exists(out_folder)) dir.create(out_folder, recursive = TRUE)
+
+# --- 3. Copy PDB file into folder ---
+pdb_target <- file.path(out_folder, basename(pdb_file))
+file.copy(pdb_file, pdb_target, overwrite = TRUE)
+
+# --- 4. Copy CSV into folder ---
+csv_target <- file.path(out_folder, basename(protein_csv))
+file.copy(protein_csv, csv_target, overwrite = TRUE)
+
+# --- 5. Create app.R file ---
+app_code <- c(
+  "library(shiny)",
+  "library(dplyr)",
+  "library(ggplot2)",
+  "library(NGLVieweR)",
+  "library(scales)",
+  "library(stringr)",
+  "library(readr)",
+  "",
+  sprintf('data <- read_csv("%s", show_col_types=FALSE)', basename(csv_target)),
+  sprintf('pdb_file <- "%s"', basename(pdb_target)),
+  "",
+  "get_residueindex_colors <- function(residues) {",
+  "  n <- length(residues)",
+  "  cols <- colorRampPalette(c('red','orange','yellow','green','blue'))(n)",
+  "  data.frame(resno=residues, color=cols)",
+  "}",
+  "",
+  "# --- UI ---",
+  "ui <- fluidPage(",
+  "  titlePanel('Protein Structure Viewer'),",
+  "  sidebarLayout(",
+  "    sidebarPanel(",
+  "      selectInput('struc_representation', 'Structure representation', c('cartoon','ribbon','surface','ball+stick'), selected='cartoon'),",
+  "      selectInput('struc_color_scheme', 'Base color scheme', c('uniform','residueindex','bfactor'), selected='uniform'),",
+  "      selectInput('viewmode', 'Residue score column', choices=names(data)[sapply(data,is.numeric)]),",
+  "      checkboxInput('normalize', 'Normalize values', value=FALSE),",
+  "      selectInput('viewmethod', 'Coloring method', c('score','topn','threshold')),",
+  "      conditionalPanel(condition='input.viewmethod==\\'topn\\'', sliderInput('topn_value','Top n%',0,100,25,5)),",
+  "      conditionalPanel(condition='input.viewmethod==\\'threshold\\'', uiOutput('threshold_slider_ui')),",
+  "      actionButton('apply','Apply Coloring')",
+  "    ),",
+  "    mainPanel(",
+  "      plotOutput('score_plot', height='250px'),",
+  "      NGLVieweROutput('structure', height='600px')",
+  "    )",
+  "  )",
+  ")",
+  "",
+  "# --- Server ---",
+  "server <- function(input, output, session) {",
+  "  data_reactive <- reactive({",
+  "    d <- data",
+  "    sel_col <- input$viewmode",
+  "    d$view <- d[[sel_col]]",
+  "    if(isTRUE(input$normalize)) d$view <- scales::rescale(d$view,to=c(0,1))",
+  "    d",
+  "  })",
+  "",
+  "  output$threshold_slider_ui <- renderUI({",
+  "    req(input$viewmode)",
+  "    d <- data_reactive()",
+  "    values <- d$view",
+  "    sliderInput('threshold_value','Threshold', min=min(values, na.rm=TRUE), max=max(values, na.rm=TRUE), value=mean(values, na.rm=TRUE), step=0.01)",
+  "  })",
+  "",
+  "  output$score_plot <- renderPlot({",
+  "    req(input$viewmode)",
+  "    d <- data_reactive()",
+  "    color_df <- get_residueindex_colors(d$resno)",
+  "    d <- dplyr::left_join(d,color_df,by='resno')",
+  "    ggplot(d,aes(x=resno,y=view)) + geom_col(aes(fill=color), width=1) + scale_fill_identity() + labs(x='Residue Number', y=input$viewmode, title=paste('Per-residue', input$viewmode)) + theme_bw()",
+  "  })",
+  "",
+  "  output$structure <- renderNGLVieweR({",
+  "    NGLVieweR(pdb_file) %>% addRepresentation(type=input$struc_representation, param=list(name='base', colorScheme=input$struc_color_scheme)) %>% stageParameters(backgroundColor='white') %>% setQuality('medium') %>% setFocus(0)",
+  "  })",
+  "",
+  "  observeEvent(input$apply,{",
+  "    d <- data_reactive()",
+  "    proxy <- NGLVieweR_proxy('structure')",
+  "    for(i in 1:21) proxy %>% removeSelection(paste0('sel',i))",
+  "    proxy %>% removeSelection('threshold') %>% removeSelection('topn')",
+  "    # ...rest of your server logic...",
+  "  })",
+  "}",
+  "",
+  "shinyApp(ui, server)"
+)
+
+# Write to app.R
+writeLines(app_code, file.path(out_folder,"app.R"))
+message("Shiny app folder created: ", out_folder)
+message("Run it in R with:")
+message("  setwd('", out_folder, "')")
+message("  shiny::runApp()")

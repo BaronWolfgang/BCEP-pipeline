@@ -1,0 +1,28 @@
+#!/bin/bash
+#SBATCH --job-name=view_test
+#SBATCH --partition=gpu
+#SBATCH --nodes=1
+#SBATCH --gpus-per-node=1
+#SBATCH --mem=20gb
+#SBATCH --cpus-per-task=4
+#SBATCH --time=00:30:00
+#SBATCH --output=logs/view_test.log
+
+#run your code
+echo "Job started at:"
+date
+
+echo "Current working directory:"
+pwd
+
+echo $SHELL
+
+PROTEIN_CSV="test_output/2BIB_merged.csv"
+PDB_FILE="test_data/PDB/3CX3.pdb"
+OUT_SHINY="test_output/3CX3_shiny"
+
+echo "Running structure viewer generator..."
+Rscript scripts/generate_shiny_app.R "$PROTEIN_CSV" "$PDB_FILE" "$OUT_SHINY"
+
+echo "Job finished at:"
+date

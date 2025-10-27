@@ -11,3 +11,6 @@ src/*
 temp/
 test_output/
 logs/
+
+#ignore encodings
+src/bp3/esm_encodings/*
